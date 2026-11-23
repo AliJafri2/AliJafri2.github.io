@@ -5,146 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ali — Software Engineer</title>
     <meta name="description" content="Ali is an AI-native software engineer focused on bringing real value through technical expertise." />
-    <meta name="theme-color" content="#10241a" />
+    <meta name="theme-color" content="#0c1e14" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="logo" href="/">ali<span class="accent">.</span></a>
+    <div class="mountains" aria-hidden="true">
+      <img id="mountains" src="/images/background.jpg" alt="" />
+    </div>
 
-      <nav class="filters" aria-label="Filter tiles">
-        <span class="filter-pill" aria-hidden="true"></span>
-        <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" data-filter="about" aria-pressed="false">About</button>
-        <button class="filter" data-filter="projects" aria-pressed="false">Projects</button>
-        <button class="filter" data-filter="links" aria-pressed="false">Links</button>
-      </nav>
+    <main class="page">
+      <!-- ============ Header ============ -->
+      <header class="hero">
+        <figure class="photo reveal" style="--d: 0ms">
+          <img src="/images/ali.jpg" alt="Portrait of Ali" />
+        </figure>
 
-      <a class="contact-link" href="#contact">Contact</a>
-    </header>
+        <div class="intro reveal" style="--d: 80ms">
+          <h1 class="name">I’m <em>Ali</em>! <span class="emoji wave" aria-hidden="true">👋</span></h1>
+          <!-- One-liner: who you are + what you do -->
+          <p class="oneliner">A one-liner about me and what I do.</p>
+          <ul class="links">
+            <li>
+              <a href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="mailto:you@example.com">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5.5h18v13H3z M3.5 6l8.5 7 8.5-7"/></svg>
+                Email
+              </a>
+            </li>
+          </ul>
+        </div>
 
-    <!--
-      Tile sizes: default = 1×1, .wide = 2×1, .tall = 1×2.
-      data-cat controls which filter highlights the tile: about | projects | links
-    -->
-    <main class="grid">
-      <!-- Intro -->
-      <section class="tile wide intro" data-cat="about">
-        <p class="eyebrow">Software Engineer</p>
-        <h1 class="name">I’m Ali<span class="accent">!</span></h1>
-        <p class="tagline">
-          An AI-native software engineer focused on bringing real value through technical expertise.
-        </p>
+        <div class="school reveal" style="--d: 120ms">
+          <img class="school-logo" src="/images/school-logo.png" alt="The University of Texas at Dallas" />
+          <p class="grad">CS Grad ’27</p>
+        </div>
+
+        <div class="about reveal" style="--d: 200ms">
+          <h2 class="about-title">Who I Am and How I Work <span class="emoji" aria-hidden="true">💡</span></h2>
+          <p>
+            I’m an AI-native software engineer focused on bringing real value through technical expertise.
+            <span class="muted">A sentence or two more on what you’re building, what you care about, and what you’re looking for next.</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- ============ Tiles ============ -->
+      <section class="tiles">
+        <!-- Experience -->
+        <article class="tile experience reveal" style="--d: 300ms">
+          <h2 class="tile-title">Experience <span class="emoji" aria-hidden="true">💼</span></h2>
+          <ul class="rows">
+            <li class="row">
+              <span class="logo">A</span>
+              <div>
+                <p class="row-title">Company A</p>
+                <p class="row-sub">Software Engineer Intern · Summer 2026</p>
+                <p class="row-desc">One line on what you built and the impact it had.</p>
+              </div>
+            </li>
+            <li class="row">
+              <span class="logo">B</span>
+              <div>
+                <p class="row-title">Company B</p>
+                <p class="row-sub">Role · 2025</p>
+                <p class="row-desc">One line on what you built and the impact it had.</p>
+              </div>
+            </li>
+            <li class="row">
+              <span class="logo">C</span>
+              <div>
+                <p class="row-title">Company C</p>
+                <p class="row-sub">Role · 2024</p>
+                <p class="row-desc">One line on what you built and the impact it had.</p>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Latest work -->
+        <article class="tile work reveal" style="--d: 380ms">
+          <h2 class="tile-title">Latest Work <span class="emoji" aria-hidden="true">🚀</span></h2>
+          <ul class="rows">
+            <li>
+              <a class="row project" href="#" target="_blank" rel="noopener">
+                <span class="shape tri" aria-hidden="true"></span>
+                <div>
+                  <p class="row-title">Project A</p>
+                  <p class="row-desc">What it does, who it helps, and the outcome.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="row project" href="#" target="_blank" rel="noopener">
+                <span class="shape circle" aria-hidden="true"></span>
+                <div>
+                  <p class="row-title">Project B</p>
+                  <p class="row-desc">The problem, and the interesting decision you made.</p>
+                </div>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Skills -->
+        <article class="tile skills reveal" style="--d: 460ms">
+          <h2 class="tile-title">Skills and Technologies <span class="emoji" aria-hidden="true">🛠️</span></h2>
+          <ul class="skill-list">
+            <li><span class="skill-label">Languages</span> TypeScript, Python, Java, SQL</li>
+            <li><span class="skill-label">Frameworks</span> React, Node, FastAPI</li>
+            <li><span class="skill-label">Tools</span> Git, Docker, Postgres, LLM APIs</li>
+          </ul>
+        </article>
       </section>
 
-      <!-- Photo -->
-      <figure class="tile photo" data-cat="about">
-        <img src="/images/ali.jpg" alt="Portrait of Ali" />
-      </figure>
-
-      <!-- GitHub -->
-      <a class="tile social github" data-cat="links" href="#" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        <span class="arrow-btn" aria-hidden="true">↗</span>
-      </a>
-
-      <!-- Mountains -->
-      <figure class="tile scenic" data-cat="about">
-        <img src="/images/mountains.jpg" alt="" />
-        <figcaption>
-          <span class="eyebrow">Off the clock</span>
-          Usually somewhere with a view.
-        </figcaption>
-      </figure>
-
-      <!-- Toolbox -->
-      <section class="tile toolbox" data-cat="about">
-        <p class="eyebrow">Toolbox</p>
-        <ul class="chips">
-          <li>TypeScript</li>
-          <li>Python</li>
-          <li>React</li>
-          <li>Node</li>
-          <li>LLMs</li>
-          <li>Postgres</li>
-        </ul>
-      </section>
-
-      <!-- Project 1 -->
-      <article class="tile tall project" data-cat="projects">
-        <span class="proj-no"><sup>N°</sup>01</span>
-        <h2 class="proj-title">Project A</h2>
-        <hr class="rule" />
-        <p class="proj-desc">
-          A short, punchy description of what this project does, who it helps, and the outcome it delivered.
-        </p>
-        <div class="proj-foot">
-          <ul class="tags"><li>#typescript</li><li>#react</li><li>#llm</li></ul>
-          <a class="arrow-btn" href="#" target="_blank" rel="noopener" aria-label="Open Project A">↗</a>
-        </div>
-      </article>
-
-      <!-- Project 2 -->
-      <article class="tile tall project" data-cat="projects">
-        <span class="proj-no"><sup>N°</sup>02</span>
-        <h2 class="proj-title">Project B</h2>
-        <hr class="rule" />
-        <p class="proj-desc">
-          Lead with the problem, then the interesting technical decision you made to solve it.
-        </p>
-        <div class="proj-foot">
-          <ul class="tags"><li>#python</li><li>#fastapi</li><li>#postgres</li></ul>
-          <a class="arrow-btn" href="#" target="_blank" rel="noopener" aria-label="Open Project B">↗</a>
-        </div>
-      </article>
-
-      <!-- How I work -->
-      <section class="tile wide story" data-cat="about">
-        <h2 class="story-title">How I work</h2>
-        <p>
-          A few sentences on what you care about as an engineer — how you use AI day to day, the kind of problems
-          you like, and what teams get when they work with you.
-        </p>
-      </section>
-
-      <!-- Project 3 -->
-      <article class="tile wide project" data-cat="projects">
-        <div class="proj-head">
-          <span class="proj-no"><sup>N°</sup>03</span>
-          <h2 class="proj-title">Project C</h2>
-        </div>
-        <hr class="rule" />
-        <p class="proj-desc">
-          An AI-powered tool or experiment. Mention a concrete number if you have one — users, latency, accuracy.
-        </p>
-        <div class="proj-foot">
-          <ul class="tags"><li>#agents</li><li>#rag</li><li>#node</li></ul>
-          <a class="arrow-btn" href="#" target="_blank" rel="noopener" aria-label="Open Project C">↗</a>
-        </div>
-      </article>
-
-      <!-- LinkedIn -->
-      <a class="tile social linkedin" data-cat="links" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-        <span class="arrow-btn" aria-hidden="true">↗</span>
-      </a>
-
-      <!-- Contact -->
-      <a class="tile contact" id="contact" data-cat="links" href="mailto:you@example.com">
-        <p class="eyebrow">Get in touch</p>
-        <p class="contact-big">Say hi<span class="accent">.</span></p>
-        <span class="arrow-btn" aria-hidden="true">↗</span>
-      </a>
     </main>
 
-    <footer class="footer">© <span id="year"></span> Ali</footer>
-
-    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,26 +1,25 @@
 :root {
-  --bg: #10241a; /* page: deeper bottle green */
-  --tile: #1b3a26; /* tiles: bottle green */
-  --tile-hover: #204530;
-  --border: rgba(242, 242, 238, 0.09);
+  --bg: #0c1e14; /* page: deep bottle green */
+  --tile: rgba(23, 51, 31, 0.82); /* tiles: bottle green, slightly see-through */
+  --tile-solid: #17331f;
+  --border: rgba(242, 242, 238, 0.1);
   --accent: #3fa55b; /* label green */
-  --label: #f2f2ee; /* label off-white */
-  --ink: #1e1e1e;
-  --ink-soft: #5b5f5c;
-  --rule: #c4c7c1;
+  --label: #f2f2ee;
   --text: #f2f2ee;
-  --text-dim: rgba(242, 242, 238, 0.7);
+  --text-dim: rgba(242, 242, 238, 0.68);
   --sky: #9fd3f2; /* headshot backdrop */
 
   --gutter: clamp(16px, 4vw, 48px);
-  --gap: clamp(12px, 1.6vw, 20px);
-  --w: min(1180px, 100vw - 2 * var(--gutter));
-  --cols: 4;
-  --cell: calc((var(--w) - (var(--cols) - 1) * var(--gap)) / var(--cols));
-  --radius: 28px;
+  /* one spacing unit for every gap between blocks */
+  --space: clamp(16px, 2vw, 24px);
+  --inner: 16px; /* spacing inside tiles */
+  --w: min(1040px, 100vw - 2 * var(--gutter));
+  --radius: 24px;
 
-  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 *,
@@ -30,218 +29,81 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100svh;
   color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-.accent {
-  color: var(--accent);
-}
-
-.eyebrow {
+p {
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-dim);
 }
 
-/* ---------------- Top bar ---------------- */
-.topbar {
-  width: var(--w);
-  margin: 0 auto;
-  padding: 28px 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
+.emoji {
+  font-family: var(--font-emoji);
+  font-weight: 400;
+  display: inline-block;
 }
 
-.logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 40px;
-  line-height: 1;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.filters {
-  position: relative;
-  display: flex;
-  gap: 2px;
-  padding: 5px;
-  border: 1.5px solid var(--border);
-  border-radius: 999px;
-  background: rgba(27, 58, 38, 0.6);
-}
-
-.filter-pill {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  height: calc(100% - 10px);
-  border-radius: 999px;
-  background: rgba(242, 242, 238, 0.12);
-  transition:
-    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-    width 400ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.filter {
-  position: relative;
-  border: 0;
-  background: none;
-  color: var(--text-dim);
-  font: 600 15px var(--font-body);
-  padding: 9px 18px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: color 200ms;
-}
-.filter:hover,
-.filter.is-active {
-  color: var(--text);
-}
-
-.contact-link {
-  justify-self: end;
-  color: var(--text);
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-}
-.contact-link:hover {
-  color: var(--accent);
-}
-
-/* ---------------- Grid ---------------- */
-.grid {
-  width: var(--w);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(var(--cols), 1fr);
-  grid-auto-rows: var(--cell);
-  grid-auto-flow: dense;
-  gap: var(--gap);
-}
-
-.tile {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--tile);
-  border: 1.5px solid var(--border);
-  padding: clamp(20px, 2.2vw, 32px);
-  color: var(--text);
-  text-decoration: none;
-  transition:
-    opacity 400ms ease,
-    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 400ms ease,
-    background 250ms ease,
-    border-color 250ms ease;
-  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--d, 0ms);
-}
-
-.tile.wide {
-  grid-column: span 2;
-}
-.tile.tall {
-  grid-row: span 2;
-}
-
-a.tile:hover,
-.tile.project:hover {
-  transform: translateY(-4px);
-}
-a.tile:hover {
-  background: var(--tile-hover);
-  border-color: rgba(242, 242, 238, 0.18);
-}
-
-.tile.is-dim {
-  opacity: 0.22;
-  filter: saturate(0.3);
-  transform: scale(0.98);
+/* ---------------- Mountain backdrop ---------------- */
+.mountains {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
+  overflow: hidden;
+  /* fade out toward the top so the header stays readable */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 30%, #000 65%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 30%, #000 65%);
 }
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-}
-
-/* round arrow button, bottom-left */
-.arrow-btn {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border);
-  background: rgba(16, 36, 26, 0.55);
-  color: var(--text);
-  font-size: 17px;
-  text-decoration: none;
-  transition: background 200ms, border-color 200ms, color 200ms;
-}
-.social .arrow-btn,
-.contact .arrow-btn {
+.mountains img {
   position: absolute;
-  left: 20px;
-  bottom: 20px;
-}
-a.tile:hover .arrow-btn,
-.arrow-btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
-/* ---------------- Intro ---------------- */
-.intro {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+  left: -2%;
+  top: 0;
+  width: 104%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+  opacity: 0.35;
 }
 
-.name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(56px, 6.4vw, 96px);
-  line-height: 0.9;
+/* ---------------- Page ---------------- */
+.page {
+  width: var(--w);
+  margin: 0 auto;
+  padding: clamp(32px, 6vh, 56px) 0;
+}
+
+/* ---------------- Header ---------------- */
+.hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.1fr);
+  grid-template-areas:
+    'photo  intro about'
+    'school .     about';
+  column-gap: clamp(20px, 3vw, 44px);
+  row-gap: var(--space);
+  align-items: start;
+  margin-bottom: var(--space);
+}
+
+.photo {
+  grid-area: photo;
   margin: 0;
-}
-
-.tagline {
-  margin: 6px 0 0;
-  font-size: clamp(16px, 1.35vw, 19px);
-  line-height: 1.55;
-  color: var(--text-dim);
-  max-width: 38ch;
-}
-
-/* ---------------- Photo ---------------- */
-.tile.photo {
-  padding: 0;
+  width: clamp(112px, 11vw, 150px);
+  aspect-ratio: 1;
+  border-radius: 22px;
+  overflow: hidden;
   background: var(--sky);
+  box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6);
 }
-.tile.photo img {
+.photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -249,210 +111,316 @@ a.tile:hover .arrow-btn,
   display: block;
 }
 
-/* ---------------- Social ---------------- */
-.social {
-  display: grid;
-  place-items: center;
-}
-.social-icon {
-  width: min(38%, 112px);
-  height: auto;
-  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-a.social:hover .social-icon {
-  transform: scale(1.08) rotate(-4deg);
-}
-.github .social-icon {
-  color: var(--label);
-}
-.linkedin .social-icon {
-  color: #7fb8e0;
-}
-
-/* ---------------- Scenic ---------------- */
-.tile.scenic {
-  padding: 0;
-}
-.tile.scenic img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 55% 50%;
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.tile.scenic:hover img {
-  transform: scale(1.06);
-}
-.tile.scenic figcaption {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 40px 22px 20px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.35;
-  background: linear-gradient(to top, rgba(16, 36, 26, 0.92), rgba(16, 36, 26, 0));
-}
-.tile.scenic figcaption .eyebrow {
-  display: block;
-  margin-bottom: 4px;
-}
-
-/* ---------------- Toolbox ---------------- */
-.toolbox {
+.school {
+  grid-area: school;
+  justify-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-.chips {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
 }
-.chips li {
-  padding: 7px 12px;
-  border-radius: 999px;
-  border: 1.5px solid var(--border);
-  background: rgba(16, 36, 26, 0.5);
-  font-size: 14px;
-  font-weight: 500;
+
+.school-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
 }
 
-/* ---------------- Story ---------------- */
-.story {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.story-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(30px, 2.8vw, 42px);
+.grad {
   line-height: 1;
-  margin: 0 0 12px;
-}
-.story p {
-  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-dim);
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 52ch;
 }
 
-/* ---------------- Project (wine-label style) ---------------- */
-.tile.project {
-  background: var(--label);
-  color: var(--ink);
-  border-color: transparent;
-  display: flex;
-  flex-direction: column;
+.intro {
+  grid-area: intro;
 }
 
-.proj-head {
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-}
-
-.proj-no {
+.name {
+  margin: 0;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(64px, 7vw, 104px);
-  line-height: 0.8;
+  font-weight: 400;
+  font-size: clamp(48px, 4.8vw, 70px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.name em {
+  font-style: italic;
   color: var(--accent);
 }
-.proj-no sup {
-  font-size: 0.3em;
-  vertical-align: top;
-  margin-right: 2px;
-  position: relative;
-  top: 0.1em;
+.name .emoji {
+  font-size: 0.72em;
+  vertical-align: 0.06em;
 }
-.wide .proj-no {
-  font-size: clamp(52px, 4.6vw, 68px);
+.wave {
+  transform-origin: 70% 80%;
+  animation: wave 2.6s ease-in-out 1s 2;
 }
-
-.proj-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(32px, 3vw, 44px);
-  line-height: 0.92;
-  text-transform: uppercase;
-  margin: 14px 0 0;
-}
-.wide .proj-title {
-  margin: 0;
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0); }
+  10%, 30% { transform: rotate(16deg); }
+  20%, 40% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
 }
 
-.rule {
-  width: 100%;
-  border: none;
-  border-top: 1.5px solid var(--rule);
-  margin: 16px 0;
+/* the one-liner under the name */
+.oneliner {
+  margin-top: 14px;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.45;
+  color: var(--text-dim);
+  max-width: 32ch;
 }
 
-.proj-desc {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.55;
-  color: #2c2f2d;
-}
-
-.proj-foot {
-  margin-top: auto;
-  padding-top: 16px;
+/* contacts sit in a row under the one-liner */
+.links {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 200ms;
+}
+.links svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.links a:hover {
+  color: var(--accent);
 }
 
-.tags {
+.about {
+  grid-area: about;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+}
+.about-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.1vw, 30px);
+  line-height: 1;
+}
+.about-title .emoji {
+  font-size: 0.8em;
+}
+.about .muted {
+  display: block;
+  margin-top: 12px;
+  color: var(--text-dim);
+  font-size: 0.9em;
+}
+
+/* ---------------- Tiles ---------------- */
+.tiles {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--space);
+}
+
+.tile {
+  background: var(--tile);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: clamp(18px, 2vw, 28px);
+}
+
+.experience {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.tile-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 var(--inner);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 2.3vw, 34px);
+  line-height: 1;
+}
+.tile-title .emoji {
+  font-size: 0.8em;
+}
+
+.rows {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2px 12px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  flex-direction: column;
+  gap: 8px;
 }
 
-.project .arrow-btn {
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  margin: 0 -12px;
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 200ms;
+}
+/* Experience: rows share the tile height equally, so the space around every
+   divider (and under the title) stays the same however tall the tile is. */
+.experience .rows {
+  flex: 1;
+  gap: 0;
+}
+.experience .row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  align-items: start;
+  column-gap: 16px;
+  margin: 0;
+  padding: var(--inner) 0;
+  border-radius: 0;
+}
+.experience .row:first-child {
+  padding-top: 0;
+}
+.experience .row:last-child {
+  padding-bottom: 0;
+}
+.experience .row + .row {
+  border-top: 1px solid var(--border);
+}
+
+/* Latest work: rows bleed out for the hover highlight; the negative margin
+   keeps their text aligned with the title and tile edges. */
+.work .rows {
+  gap: 0;
+  margin: calc(var(--inner) / -2) 0;
+}
+.work .row {
+  padding: calc(var(--inner) / 2) 12px;
+}
+
+.logo {
   flex: none;
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--label);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--label);
+  color: var(--tile-solid);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
 }
 
-/* ---------------- Contact ---------------- */
-.contact {
+.row-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+.row-sub {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+}
+.row-desc {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+/* Latest work rows */
+.project {
+  align-items: center;
+}
+.project:hover {
+  background: rgba(242, 242, 238, 0.06);
+}
+.project > div {
+  flex: 1;
+}
+.shape {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0 6px;
+  border: 2.5px solid var(--accent);
+}
+.shape.circle {
+  border-radius: 50%;
+  margin: 0 7px;
+}
+.shape.tri {
+  border: none;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 21px solid var(--accent);
+}
+.arrow {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(242, 242, 238, 0.08);
+  font-size: 15px;
+  transition: background 200ms;
+}
+.project:hover .arrow {
+  background: var(--accent);
+}
+
+/* Skills */
+.skill-list {
+  margin: 0;
+  padding: 0 0 0 20px;
   display: flex;
   flex-direction: column;
-}
-.contact-big {
-  margin: 8px 0 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(44px, 4.4vw, 64px);
-  line-height: 0.9;
-}
-
-/* ---------------- Footer ---------------- */
-.footer {
-  width: var(--w);
-  margin: 0 auto;
-  padding: 40px 0 48px;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--text-dim);
+}
+.skill-list li::marker {
+  color: var(--accent);
+}
+.skill-label {
+  display: inline-block;
+  min-width: 96px;
+  font-family: var(--font-body);
   font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
 }
 
 :focus-visible {
@@ -460,69 +428,67 @@ a.social:hover .social-icon {
   outline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tile {
-    animation: none;
+/* ---------------- Entrance ---------------- */
+.reveal {
+  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  html {
-    scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .wave {
+    animation: none;
   }
 }
 
 /* ---------------- Responsive ---------------- */
-/* Below desktop: rows size to content; square tiles keep a square minimum. */
-@media (max-width: 900px) {
-  :root {
-    --cols: 2;
+@media (max-width: 980px) {
+  .hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'photo  intro'
+      'school .'
+      'about  about';
   }
-  .grid {
-    grid-auto-rows: auto;
-  }
-  .tile {
-    min-height: var(--cell);
-  }
-  .tile.tall {
-    grid-row: auto;
-  }
-  .tile.wide,
-  .tile.project {
-    min-height: 0;
-  }
-  .tile.project .proj-foot {
-    margin-top: 0;
+  .skill-label {
+    display: block;
   }
 }
 
-@media (max-width: 640px) {
-  .topbar {
-    grid-template-columns: 1fr auto;
-    row-gap: 16px;
+@media (max-width: 760px) {
+  .tiles {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .filters {
-    grid-row: 2;
-    grid-column: 1 / -1;
-    justify-self: start;
-  }
-  .filter {
-    padding: 8px 14px;
+  .experience {
+    grid-row: auto;
   }
 }
 
 @media (max-width: 560px) {
-  :root {
-    --cols: 1;
+  .hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'photo'
+      'intro'
+      'school'
+      'about';
   }
-  .tile.wide {
-    grid-column: auto;
+  .photo {
+    width: 120px;
   }
-  .tile.toolbox,
-  .tile.contact {
-    min-height: 0;
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .tile.social {
-    min-height: 180px;
+  .school {
+    justify-self: start;
+    flex-direction: row;
+    gap: 12px;
   }
-  .tile.contact {
-    padding-bottom: 84px;
-  }
+
 }
