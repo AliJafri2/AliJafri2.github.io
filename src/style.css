@@ -483,29 +483,6 @@ p {
 .project > div {
   flex: 1;
 }
-.shape {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  margin: 0 6px;
-  border: 2.5px solid var(--accent);
-}
-/* filled diamond, same footprint as the triangle */
-.shape.diamond {
-  width: 24px;
-  height: 24px;
-  border: none;
-  background: var(--accent);
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-}
-.shape.tri {
-  border: none;
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 21px solid var(--accent);
-}
 .arrow {
   flex: none;
   display: grid;
