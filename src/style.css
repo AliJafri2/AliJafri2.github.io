@@ -78,9 +78,7 @@ p {
 .hero {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.1fr);
-  grid-template-areas:
-    'photo  intro about'
-    'school .     about';
+  grid-template-areas: 'photo intro about';
   column-gap: clamp(20px, 3vw, 44px);
   row-gap: var(--space);
   align-items: start;
@@ -103,31 +101,6 @@ p {
   object-fit: cover;
   object-position: 50% 30%;
   display: block;
-}
-
-.school {
-  grid-area: school;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.school-logo {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.grad {
-  line-height: 1;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-dim);
 }
 
 .intro {
@@ -362,8 +335,16 @@ p {
   color: var(--tile-solid);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: -0.02em;
+}
+
+.logo img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain; /* wide logos (e.g. CVS Health) fit inside the square */
+  display: block;
+  mix-blend-mode: multiply; /* lets a logo's white background take on the tile colour */
 }
 
 .row-title {
@@ -486,9 +467,8 @@ p {
   .hero {
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas:
-      'photo  intro'
-      'school .'
-      'about  about';
+      'photo intro'
+      'about about';
   }
   .skill-label {
     display: block;
@@ -506,23 +486,14 @@ p {
 
 @media (max-width: 560px) {
   .hero {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       'photo'
       'intro'
-      'school'
       'about';
   }
   .photo {
     width: 120px;
-  }
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .school {
-    justify-self: start;
-    flex-direction: row;
-    gap: 12px;
   }
 
 }
