@@ -16,10 +16,10 @@
   --w: min(1040px, 100vw - 2 * var(--gutter));
   --radius: 24px;
 
-  --font-display: 'Instrument Serif', Georgia, serif;
+  /* one family, several weights: Geist for everything, Geist Mono for metadata */
+  --font-display: 'Geist', system-ui, -apple-system, sans-serif;
   --font-body: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
 }
 
 *,
@@ -43,12 +43,6 @@ body {
 
 p {
   margin: 0;
-}
-
-.emoji {
-  font-family: var(--font-emoji);
-  font-weight: 400;
-  display: inline-block;
 }
 
 /* ---------------- Mountain backdrop ---------------- */
@@ -143,29 +137,14 @@ p {
 .name {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(48px, 4.8vw, 70px);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(44px, 4.4vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.04em;
   white-space: nowrap;
 }
-.name em {
-  font-style: italic;
+.name .accent {
   color: var(--accent);
-}
-.name .emoji {
-  font-size: 0.72em;
-  vertical-align: 0.06em;
-}
-.wave {
-  transform-origin: 70% 80%;
-  animation: wave 2.6s ease-in-out 1s 2;
-}
-@keyframes wave {
-  0%, 60%, 100% { transform: rotate(0); }
-  10%, 30% { transform: rotate(16deg); }
-  20%, 40% { transform: rotate(-8deg); }
-  50% { transform: rotate(10deg); }
 }
 
 /* the one-liner under the name */
@@ -216,12 +195,10 @@ p {
   gap: 8px;
   margin: 0 0 12px;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(24px, 2.1vw, 30px);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
   line-height: 1;
-}
-.about-title .emoji {
-  font-size: 0.8em;
 }
 .about .muted {
   display: block;
@@ -258,12 +235,10 @@ p {
   gap: 10px;
   margin: 0 0 var(--inner);
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(28px, 2.3vw, 34px);
+  font-weight: 600;
+  font-size: clamp(20px, 1.8vw, 24px);
+  letter-spacing: -0.02em;
   line-height: 1;
-}
-.tile-title .emoji {
-  font-size: 0.8em;
 }
 
 .rows {
@@ -333,12 +308,13 @@ p {
   background: var(--label);
   color: var(--tile-solid);
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 24px;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.02em;
 }
 
 .row-title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
 }
 .row-sub {
@@ -419,7 +395,7 @@ p {
   min-width: 96px;
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
 }
 
@@ -441,8 +417,7 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .wave {
+  .reveal {
     animation: none;
   }
 }
