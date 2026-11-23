@@ -216,11 +216,64 @@ p {
 }
 
 .tile {
-  background: var(--tile);
+  position: relative;
+  isolation: isolate; /* keeps the glow + grain layers behind the content */
+  overflow: hidden;
+  /* faint light from above, over the near-black surface */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 40%),
+    var(--tile);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-radius: var(--radius);
   padding: clamp(18px, 2vw, 28px);
+  /* layered elevation: contact shadow + soft ambient shadow */
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 10px 30px -12px rgba(0, 0, 0, 0.55);
+  transition:
+    translate 500ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* cursor spotlight: position comes from --mx / --my (set in main.js) */
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(63, 165, 91, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+/* fine grain for a tactile, printed finish */
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover {
+    translate: 0 -3px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.35),
+      0 24px 48px -16px rgba(0, 0, 0, 0.7);
+  }
+  .tile:hover::before {
+    opacity: 1;
+  }
 }
 
 .experience {
@@ -406,7 +459,7 @@ p {
 
 /* ---------------- Entrance ---------------- */
 .reveal {
-  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
   animation-delay: var(--d, 0ms);
 }
 @keyframes rise {
@@ -419,6 +472,12 @@ p {
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     animation: none;
+  }
+  .tile {
+    transition: none;
+  }
+  .tile:hover {
+    translate: none;
   }
 }
 
