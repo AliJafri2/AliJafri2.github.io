@@ -1,13 +1,17 @@
 :root {
+  /* motion tokens: one curve + a few durations, shared by everything */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* decelerate on arrival */
+  --dur-fast: 180ms; /* hover colour feedback */
+  --dur-slow: 700ms; /* ambient light, entrance */
   --bg: #0c1e14; /* page: deep bottle green */
   --tile: rgba(14, 15, 15, 0.8); /* tiles: near-black (#121212 family), slightly see-through */
   --tile-solid: #121212;
   --border: rgba(242, 242, 238, 0.1);
-  --accent: #3fa55b; /* label green */
+  --accent: #6ea3d8; /* lake blue, sampled from the background photo */
   --label: #f2f2ee;
   --text: #f2f2ee;
   --text-dim: rgba(242, 242, 238, 0.68);
-  --sky: #9fd3f2; /* headshot backdrop */
+  --sky: #6ea3d8; /* headshot backdrop = accent */
 
   --gutter: clamp(16px, 4vw, 48px);
   /* one spacing unit for every gap between blocks */
@@ -16,10 +20,9 @@
   --w: min(1040px, 100vw - 2 * var(--gutter));
   --radius: 24px;
 
-  /* one family, several weights: Geist for everything, Geist Mono for metadata */
+  /* one family, several weights */
   --font-display: 'Geist', system-ui, -apple-system, sans-serif;
   --font-body: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
 }
 
 *,
@@ -146,7 +149,7 @@ p {
   font-weight: 500;
   font-size: 15px;
   text-decoration: none;
-  transition: color 200ms;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 .links svg {
   width: 16px;
@@ -204,9 +207,6 @@ p {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.35),
     0 10px 30px -12px rgba(0, 0, 0, 0.55);
-  transition:
-    translate 500ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* cursor spotlight: position comes from --mx / --my (set in main.js) */
@@ -216,12 +216,12 @@ p {
   inset: 0;
   z-index: -1;
   background: radial-gradient(
-    480px circle at var(--mx, 50%) var(--my, 0%),
-    rgba(63, 165, 91, 0.18),
-    transparent 60%
+    560px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.045),
+    transparent 65%
   );
   opacity: 0;
-  transition: opacity 400ms ease;
+  transition: opacity var(--dur-slow) var(--ease-out);
   pointer-events: none;
 }
 
@@ -238,12 +238,6 @@ p {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .tile:hover {
-    translate: 0 -3px;
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.35),
-      0 24px 48px -16px rgba(0, 0, 0, 0.7);
-  }
   .tile:hover::before {
     opacity: 1;
   }
@@ -285,7 +279,7 @@ p {
   border-radius: 18px;
   color: inherit;
   text-decoration: none;
-  transition: background 200ms;
+  transition: background var(--dur-fast) var(--ease-out);
 }
 /* Experience: rows share the tile height equally, so the space around every
    divider (and under the title) stays the same however tall the tile is. */
@@ -351,10 +345,24 @@ p {
   font-weight: 500;
   font-size: 16px;
 }
+/* role title on the left, its date pinned to the right on the same line */
+.experience .row-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.row-date {
+  flex: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
 .row-sub {
-  margin-top: 3px;
-  font-family: var(--font-mono);
-  font-size: 12px;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: 14px;
   color: var(--accent);
   font-weight: 500;
 }
@@ -382,9 +390,13 @@ p {
   margin: 0 6px;
   border: 2.5px solid var(--accent);
 }
-.shape.circle {
-  border-radius: 50%;
-  margin: 0 7px;
+/* filled diamond, same footprint as the triangle */
+.shape.diamond {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--accent);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 .shape.tri {
   border: none;
@@ -403,10 +415,11 @@ p {
   border-radius: 50%;
   background: rgba(242, 242, 238, 0.08);
   font-size: 15px;
-  transition: background 200ms;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
 .project:hover .arrow {
   background: var(--accent);
+  color: var(--tile-solid); /* dark arrow stays legible on the light blue */
 }
 
 /* Skills */
@@ -416,8 +429,8 @@ p {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text-dim);
 }
@@ -440,13 +453,13 @@ p {
 
 /* ---------------- Entrance ---------------- */
 .reveal {
-  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: rise var(--dur-slow) var(--ease-out) backwards;
   animation-delay: var(--d, 0ms);
 }
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(8px);
   }
 }
 
@@ -454,11 +467,8 @@ p {
   .reveal {
     animation: none;
   }
-  .tile {
-    transition: none;
-  }
-  .tile:hover {
-    translate: none;
+  .tile::before {
+    display: none;
   }
 }
 
