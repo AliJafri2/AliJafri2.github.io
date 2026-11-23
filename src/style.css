@@ -1,0 +1,528 @@
+:root {
+  --bg: #10241a; /* page: deeper bottle green */
+  --tile: #1b3a26; /* tiles: bottle green */
+  --tile-hover: #204530;
+  --border: rgba(242, 242, 238, 0.09);
+  --accent: #3fa55b; /* label green */
+  --label: #f2f2ee; /* label off-white */
+  --ink: #1e1e1e;
+  --ink-soft: #5b5f5c;
+  --rule: #c4c7c1;
+  --text: #f2f2ee;
+  --text-dim: rgba(242, 242, 238, 0.7);
+  --sky: #9fd3f2; /* headshot backdrop */
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --gap: clamp(12px, 1.6vw, 20px);
+  --w: min(1180px, 100vw - 2 * var(--gutter));
+  --cols: 4;
+  --cell: calc((var(--w) - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  --radius: 28px;
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ---------------- Top bar ---------------- */
+.topbar {
+  width: var(--w);
+  margin: 0 auto;
+  padding: 28px 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.filters {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  padding: 5px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: rgba(27, 58, 38, 0.6);
+}
+
+.filter-pill {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: calc(100% - 10px);
+  border-radius: 999px;
+  background: rgba(242, 242, 238, 0.12);
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.filter {
+  position: relative;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  font: 600 15px var(--font-body);
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 200ms;
+}
+.filter:hover,
+.filter.is-active {
+  color: var(--text);
+}
+
+.contact-link {
+  justify-self: end;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+.contact-link:hover {
+  color: var(--accent);
+}
+
+/* ---------------- Grid ---------------- */
+.grid {
+  width: var(--w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-auto-rows: var(--cell);
+  grid-auto-flow: dense;
+  gap: var(--gap);
+}
+
+.tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--tile);
+  border: 1.5px solid var(--border);
+  padding: clamp(20px, 2.2vw, 32px);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    opacity 400ms ease,
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 400ms ease,
+    background 250ms ease,
+    border-color 250ms ease;
+  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.tile.wide {
+  grid-column: span 2;
+}
+.tile.tall {
+  grid-row: span 2;
+}
+
+a.tile:hover,
+.tile.project:hover {
+  transform: translateY(-4px);
+}
+a.tile:hover {
+  background: var(--tile-hover);
+  border-color: rgba(242, 242, 238, 0.18);
+}
+
+.tile.is-dim {
+  opacity: 0.22;
+  filter: saturate(0.3);
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* round arrow button, bottom-left */
+.arrow-btn {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: rgba(16, 36, 26, 0.55);
+  color: var(--text);
+  font-size: 17px;
+  text-decoration: none;
+  transition: background 200ms, border-color 200ms, color 200ms;
+}
+.social .arrow-btn,
+.contact .arrow-btn {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+a.tile:hover .arrow-btn,
+.arrow-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ---------------- Intro ---------------- */
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(56px, 6.4vw, 96px);
+  line-height: 0.9;
+  margin: 0;
+}
+
+.tagline {
+  margin: 6px 0 0;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 38ch;
+}
+
+/* ---------------- Photo ---------------- */
+.tile.photo {
+  padding: 0;
+  background: var(--sky);
+}
+.tile.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+}
+
+/* ---------------- Social ---------------- */
+.social {
+  display: grid;
+  place-items: center;
+}
+.social-icon {
+  width: min(38%, 112px);
+  height: auto;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+a.social:hover .social-icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+.github .social-icon {
+  color: var(--label);
+}
+.linkedin .social-icon {
+  color: #7fb8e0;
+}
+
+/* ---------------- Scenic ---------------- */
+.tile.scenic {
+  padding: 0;
+}
+.tile.scenic img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 50%;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tile.scenic:hover img {
+  transform: scale(1.06);
+}
+.tile.scenic figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 40px 22px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.35;
+  background: linear-gradient(to top, rgba(16, 36, 26, 0.92), rgba(16, 36, 26, 0));
+}
+.tile.scenic figcaption .eyebrow {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ---------------- Toolbox ---------------- */
+.toolbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips li {
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: rgba(16, 36, 26, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ---------------- Story ---------------- */
+.story {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.story-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 2.8vw, 42px);
+  line-height: 1;
+  margin: 0 0 12px;
+}
+.story p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+/* ---------------- Project (wine-label style) ---------------- */
+.tile.project {
+  background: var(--label);
+  color: var(--ink);
+  border-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.proj-no {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(64px, 7vw, 104px);
+  line-height: 0.8;
+  color: var(--accent);
+}
+.proj-no sup {
+  font-size: 0.3em;
+  vertical-align: top;
+  margin-right: 2px;
+  position: relative;
+  top: 0.1em;
+}
+.wide .proj-no {
+  font-size: clamp(52px, 4.6vw, 68px);
+}
+
+.proj-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin: 14px 0 0;
+}
+.wide .proj-title {
+  margin: 0;
+}
+
+.rule {
+  width: 100%;
+  border: none;
+  border-top: 1.5px solid var(--rule);
+  margin: 16px 0;
+}
+
+.proj-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2c2f2d;
+}
+
+.proj-foot {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.project .arrow-btn {
+  flex: none;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--label);
+}
+
+/* ---------------- Contact ---------------- */
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+.contact-big {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 4.4vw, 64px);
+  line-height: 0.9;
+}
+
+/* ---------------- Footer ---------------- */
+.footer {
+  width: var(--w);
+  margin: 0 auto;
+  padding: 40px 0 48px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------- Responsive ---------------- */
+/* Below desktop: rows size to content; square tiles keep a square minimum. */
+@media (max-width: 900px) {
+  :root {
+    --cols: 2;
+  }
+  .grid {
+    grid-auto-rows: auto;
+  }
+  .tile {
+    min-height: var(--cell);
+  }
+  .tile.tall {
+    grid-row: auto;
+  }
+  .tile.wide,
+  .tile.project {
+    min-height: 0;
+  }
+  .tile.project .proj-foot {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    grid-template-columns: 1fr auto;
+    row-gap: 16px;
+  }
+  .filters {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  .filter {
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --cols: 1;
+  }
+  .tile.wide {
+    grid-column: auto;
+  }
+  .tile.toolbox,
+  .tile.contact {
+    min-height: 0;
+  }
+  .tile.social {
+    min-height: 180px;
+  }
+  .tile.contact {
+    padding-bottom: 84px;
+  }
+}
