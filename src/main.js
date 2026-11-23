@@ -38,3 +38,17 @@ if (canHover && !reduceMotion) {
     });
   }
 }
+
+// "recursive sense of curiosity": spin on hover (or tap). The roll always plays
+// to the end, then resets so it can be triggered again.
+for (const phrase of document.querySelectorAll('.roll')) {
+  const words = phrase.querySelectorAll('.w');
+  const last = words[words.length - 1];
+  const start = () => {
+    if (reduceMotion || phrase.classList.contains('is-rolling')) return;
+    phrase.classList.add('is-rolling');
+  };
+  phrase.addEventListener('pointerenter', start);
+  phrase.addEventListener('click', start);
+  last.addEventListener('animationend', () => phrase.classList.remove('is-rolling'));
+}
