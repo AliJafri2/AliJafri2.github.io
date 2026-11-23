@@ -21,8 +21,8 @@
   --radius: 24px;
 
   /* one family, several weights */
-  --font-display: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-display: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
 }
 
 *,
@@ -80,7 +80,8 @@ p {
 /* ---------------- Header ---------------- */
 .hero {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.1fr);
+  /* intro column sizes to its content so the one-liner stays on one line */
+  grid-template-columns: auto auto minmax(0, 1fr);
   grid-template-areas: 'photo intro about';
   column-gap: clamp(20px, 3vw, 44px);
   row-gap: var(--space);
@@ -116,17 +117,14 @@ p {
   font-weight: 600;
   font-size: clamp(44px, 4.4vw, 60px);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   white-space: nowrap;
-}
-.name .accent {
-  color: var(--accent);
 }
 
 /* the one-liner under the name */
 .oneliner {
   margin-top: 14px;
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-size: 17px;
   line-height: 1.45;
   color: var(--text-dim);
   max-width: 32ch;
@@ -162,10 +160,12 @@ p {
 
 .about {
   grid-area: about;
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dim);
 }
 .about-title {
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -173,16 +173,9 @@ p {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 20px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
-.about .muted {
-  display: block;
-  margin-top: 12px;
-  color: var(--text-dim);
-  font-size: 0.9em;
-}
-
 /* ---------------- Tiles ---------------- */
 .tiles {
   display: grid;
@@ -257,7 +250,7 @@ p {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(20px, 1.8vw, 24px);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 
@@ -330,7 +323,7 @@ p {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 15px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .logo img {
