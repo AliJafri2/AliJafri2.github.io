@@ -1,7 +1,7 @@
 :root {
   --bg: #0c1e14; /* page: deep bottle green */
-  --tile: rgba(23, 51, 31, 0.82); /* tiles: bottle green, slightly see-through */
-  --tile-solid: #17331f;
+  --tile: rgba(14, 15, 15, 0.8); /* tiles: near-black (#121212 family), slightly see-through */
+  --tile-solid: #121212;
   --border: rgba(242, 242, 238, 0.1);
   --accent: #3fa55b; /* label green */
   --label: #f2f2ee;
